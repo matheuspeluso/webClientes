@@ -1,0 +1,37 @@
+<h4>Consultas de clientes</h4>
+<p>Listagem de clintes cadastrados.</p>
+
+<div class="table-responsive">
+    <table class=" table table-sm">
+        <thead>
+            <tr>
+                <th>Nome do cliente</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Operações</th>
+            </tr>
+        </thead>         
+        <tbody>
+            <tr *ngFor="let c of clientes">
+                <td>{{c.nome}}</td>
+                <td>{{c.email}}</td>
+                <td>{{c.telefone}}</td>
+                <td>{{c.cpf}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary me-2">Editar</button>
+                    <button class="btn btn-sm btn-danger">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    Quantidade de clientes: {{clientes.length}}
+                </td>
+            </tr>
+
+        </tfoot>
+
+    </table>
+</div>
