@@ -1,7 +1,14 @@
 <h4>Consultas de clientes</h4>
 <p>Listagem de clintes cadastrados.</p>
 
-<div class="table-responsive">
+<div *ngIf="mensagem != ''">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>{{ mensagem }}</strong>
+        <button (click)="mensagem = ''" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+</div>
+
+<div class="table-responsive mt-2">
     <table class=" table table-sm">
         <thead>
             <tr>
@@ -13,14 +20,19 @@
             </tr>
         </thead>         
         <tbody>
-            <tr *ngFor="let c of clientes">
+            <tr *ngFor="let c of clientes | paginate: { itemsPerPage : 5, currentPage: paginador }">
                 <td>{{c.nome}}</td>
                 <td>{{c.email}}</td>
-                <td>{{c.telefone}}</td>
                 <td>{{c.cpf}}</td>
+                <td>{{c.telefone}}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary me-2">Editar</button>
-                    <button class="btn btn-sm btn-danger">Excluir</button>
+                    <button [routerLink]="['/pages/clientes/edicao', c.id]" class="btn btn-sm btn-primary me-2">
+                        Editar
+                    </button>
+
+                    <button (click)="excluirCliente(c.id)" class="btn btn-sm btn-danger">
+                        Excluir
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -34,4 +46,14 @@
         </tfoot>
 
     </table>
+</div>
+
+<!--regua de paginação-->
+<div class="text-center mt-3">
+    <pagination-controls
+        (pageChange)="handlePageChange($event)"
+        previousLabel="Página anterior"
+        nextLabel="Próxima Página"
+    />
+    
 </div>
