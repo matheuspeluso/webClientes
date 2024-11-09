@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow p-4" style="max-width: 400px; width: 100%">
+
+
+    <div class="text-center mb-3">
+      <img style="width: 100%;" src="https://www.cotiinformatica.com.br/imagens/logo-coti-informatica.svg"/>
+    </div>
+
+
+    <h4 class="text-center mb-4">Autenticação de usuário</h4>
+
+
+    <div *ngIf="mensagemErro != ''">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ mensagemErro }}</strong>
+          <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+    </div>
+
+
+    <form [formGroup]="formulario" (ngSubmit)="autenticarUsuario()">
+
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email de acesso:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Digite seu email"
+          formControlName="email"
+        />
+        <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
+          Por favor, informe o seu email de acesso.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha de acesso:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Digite sua senha"
+          formControlName="senha"
+        />
+        <div class="text-danger" *ngIf="f['senha'].touched && f['senha'].invalid">
+          Por favor, informe a sua senha com pelo menos 8 caracteres.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="formulario.invalid">
+        Entrar
+      </button>
+    </form>
+    <div class="text-center mt-3">
+      <p class="mb-0">
+        Não tem uma conta? <a routerLink="/pages/usuarios/criar">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+

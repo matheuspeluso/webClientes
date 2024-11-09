@@ -1,0 +1,49 @@
+<h4>Edição de Clientes</h4>
+<p>Preencha o formulario para alterar os dados de um cliente.</p>
+
+<div *ngIf="mensagem != ''">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>{{ mensagem }}</strong>
+        <button (click)="mensagem = ''" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+</div>
+
+<form [formGroup]="formulario" (ngSubmit)="atualizarCliente()">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Nome do Cliente:</label>
+            <input type="text" class="form-control" formControlName="nome">
+            <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+                Por favor, informe o nome do cliente com pelo menos 8 caracteres.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>Email:</label>
+            <input type="text" class="form-control" formControlName="email">
+            <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
+                Por favor, informe um email valido.
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label>CPF:</label>
+            <input type="text" class="form-control" formControlName="cpf">
+            <div class="text-danger" *ngIf="f['cpf'].touched && f['cpf'].invalid">
+                Por favor, informe um CPF valido.
+            </div>
+        </div>
+         
+        <div class="col-md-2">
+            <label>Telefone:</label>
+            <input type="text" class="form-control" formControlName="telefone">
+            <div class="text-danger" *ngIf="f['telefone'].touched && f['telefone'].invalid">
+                Por favor, informe um número de telefone valido.
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="mt-3">
+        <input type="submit" class="btn btn-primary" value="Salvar Alterações" [disabled]="formulario.invalid">
+    </div>
+
+</form>
