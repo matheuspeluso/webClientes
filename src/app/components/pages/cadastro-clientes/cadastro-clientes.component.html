@@ -1,49 +1,115 @@
-<h4>Cadastro de Clientes</h4>
-<p>Preencha o furmulário para incluir um cliente.</p>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h4>Cadastro de Clientes</h4>
+      <p>Preencha o formulário para incluir um cliente.</p>
 
-<div *ngIf="mensagem != ''">
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <strong>{{ mensagem }}</strong>
-        <button (click)="mensagem = ''" type="button" class="btn-close" aria-label="Close"></button>
+
+      <div *ngIf="mensagem != ''">
+        <div
+          class="alert alert-primary alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{{ mensagem }}</strong>
+          <button
+            (click)="mensagem = ''"
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+
+
+      <form [formGroup]="formulario" (ngSubmit)="cadastrarCliente()">
+        <div class="row">
+          <!-- linha -->
+          <div class="col-md-4">
+            <!-- coluna -->
+            <label>Nome do cliente:</label>
+            <input type="text" class="form-control" formControlName="nome" />
+            <div
+              class="text-danger"
+              *ngIf="f['nome'].touched && f['nome'].invalid"
+            >
+              Por favor, informe o nome do cliente com pelo menos 8 caracteres.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!-- coluna -->
+            <label>Email do cliente:</label>
+            <input type="text" class="form-control" formControlName="email" />
+            <div
+              class="text-danger"
+              *ngIf="f['email'].touched && f['email'].invalid"
+            >
+              Por favor, informe um endereço de email válido.
+            </div>
+          </div>
+          <div class="col-md-2">
+            <!-- coluna -->
+            <label>CPF:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="cpf"
+              mask="000.000.000-00"
+            />
+            <div
+              class="text-danger"
+              *ngIf="f['cpf'].touched && f['cpf'].invalid"
+            >
+              Por favor, informe o CPF com exatamente 11 dígitos. Ex:
+              '12345678900'
+            </div>
+          </div>
+          <div class="col-md-2">
+            <!-- coluna -->
+            <label>Telefone:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="telefone"
+              mask="(00) 00000-0000"
+            />
+            <div
+              class="text-danger"
+              *ngIf="f['telefone'].touched && f['telefone'].invalid"
+            >
+              Por favor, informe o telefone com exatamente 11 dígitos. Ex:
+              '21999990000'
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <label>Tipo do cliente:</label>
+            <select class="form-select" formControlName="tipo">
+              <option value="">Escolha uma opção</option>
+              <option *ngFor="let tipo of tipos" value="{{tipo}}">{{tipo}}</option>
+            </select>
+            <div
+              class="text-danger"
+              *ngIf="f['tipo'].touched && f['tipo'].invalid">
+              Por favor, selecione o tipo do cliente.
+          </div>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <input
+            type="submit"
+            class="btn btn-success"
+            value="Realizar Cadastro"
+            [disabled]="formulario.invalid"
+          />
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
-<form [formGroup]="formulario" (ngSubmit)="cadastrarCliente()">
-    <div class="row">
-        <div class="col-md-4">
-            <label>Nome do Cliente:</label>
-            <input type="text" class="form-control" formControlName="nome">
-            <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
-                Por favor, informe o nome do cliente com pelo menos 8 caracteres.
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label>Email:</label>
-            <input type="text" class="form-control" formControlName="email">
-            <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
-                Por favor, informe um email valido.
-            </div>
-        </div>
-        <div class="col-md-2">
-            <label>CPF:</label>
-            <input type="text" class="form-control" formControlName="cpf">
-            <div class="text-danger" *ngIf="f['cpf'].touched && f['cpf'].invalid">
-                Por favor, informe um CPF valido.
-            </div>
-        </div>
-         
-        <div class="col-md-2">
-            <label>Telefone:</label>
-            <input type="text" class="form-control" formControlName="telefone">
-            <div class="text-danger" *ngIf="f['telefone'].touched && f['telefone'].invalid">
-                Por favor, informe um número de telefone valido.
-            </div>
-        </div>
-        
-    </div>
 
-    <div class="mt-3">
-        <input type="submit" class="btn btn-success" value="Realizar Cadastro" [disabled]="formulario.invalid">
-    </div>
 
-</form>
+

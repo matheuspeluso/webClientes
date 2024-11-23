@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
@@ -10,8 +11,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     CommonModule,
     RouterLink,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxMaskPipe
   ],
+
+  providers: [
+    provideNgxMask()
+  ],
+
   templateUrl: './consulta-clientes.component.html',
   styleUrl: './consulta-clientes.component.css'
 })
